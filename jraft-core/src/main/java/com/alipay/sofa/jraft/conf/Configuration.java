@@ -34,20 +34,21 @@ import com.alipay.sofa.jraft.util.Requires;
 
 /**
  * A configuration with a set of peers.
- * @author boyan (boyan@alibaba-inc.com)
  *
+ * @author boyan (boyan@alibaba-inc.com)
+ * <p>
  * 2018-Mar-15 11:00:26 AM
  */
 public class Configuration implements Iterable<PeerId>, Copiable<Configuration> {
 
-    private static final Logger   LOG             = LoggerFactory.getLogger(Configuration.class);
+    private static final Logger LOG = LoggerFactory.getLogger(Configuration.class);
 
-    private static final String   LEARNER_POSTFIX = "/learner";
+    private static final String LEARNER_POSTFIX = "/learner";
 
-    private List<PeerId>          peers           = new ArrayList<>();
+    private List<PeerId> peers = new ArrayList<>();
 
     // use LinkedHashSet to keep insertion order.
-    private LinkedHashSet<PeerId> learners        = new LinkedHashSet<>();
+    private LinkedHashSet<PeerId> learners = new LinkedHashSet<>();
 
     public Configuration() {
         super();
@@ -84,10 +85,6 @@ public class Configuration implements Iterable<PeerId>, Copiable<Configuration> 
             this.peers.add(peer.copy());
         }
         addLearners(learners);
-    }
-
-    public void setLearners(final LinkedHashSet<PeerId> learners) {
-        this.learners = learners;
     }
 
     /**
@@ -135,6 +132,10 @@ public class Configuration implements Iterable<PeerId>, Copiable<Configuration> 
      */
     public LinkedHashSet<PeerId> getLearners() {
         return this.learners;
+    }
+
+    public void setLearners(final LinkedHashSet<PeerId> learners) {
+        this.learners = learners;
     }
 
     /**
@@ -311,9 +312,9 @@ public class Configuration implements Iterable<PeerId>, Copiable<Configuration> 
     }
 
     /**
-     *  Get the difference between |*this| and |rhs|
-     *  |included| would be assigned to |*this| - |rhs|
-     *  |excluded| would be assigned to |rhs| - |*this|
+     * Get the difference between |*this| and |rhs|
+     * |included| would be assigned to |*this| - |rhs|
+     * |excluded| would be assigned to |rhs| - |*this|
      */
     public void diff(final Configuration rhs, final Configuration included, final Configuration excluded) {
         included.peers = new ArrayList<>(this.peers);

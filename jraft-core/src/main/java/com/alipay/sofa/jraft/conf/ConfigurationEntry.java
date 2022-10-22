@@ -16,28 +16,39 @@
  */
 package com.alipay.sofa.jraft.conf;
 
-import java.util.HashSet;
-import java.util.Set;
-
+import com.alipay.sofa.jraft.entity.LogId;
+import com.alipay.sofa.jraft.entity.PeerId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.alipay.sofa.jraft.entity.LogId;
-import com.alipay.sofa.jraft.entity.PeerId;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  * A configuration entry with current peers and old peers.
- * @author boyan (boyan@alibaba-inc.com)
  *
+ * @author boyan (boyan@alibaba-inc.com)
+ * <p>
  * 2018-Apr-04 2:25:06 PM
  */
 public class ConfigurationEntry {
 
-    private static final Logger LOG     = LoggerFactory.getLogger(ConfigurationEntry.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ConfigurationEntry.class);
 
-    private LogId               id      = new LogId(0, 0);
-    private Configuration       conf    = new Configuration();
-    private Configuration       oldConf = new Configuration();
+    private LogId id = new LogId(0, 0);
+    private Configuration conf = new Configuration();
+    private Configuration oldConf = new Configuration();
+
+    public ConfigurationEntry() {
+        super();
+    }
+
+    public ConfigurationEntry(final LogId id, final Configuration conf, final Configuration oldConf) {
+        super();
+        this.id = id;
+        this.conf = conf;
+        this.oldConf = oldConf;
+    }
 
     public LogId getId() {
         return this.id;
@@ -60,17 +71,6 @@ public class ConfigurationEntry {
     }
 
     public void setOldConf(final Configuration oldConf) {
-        this.oldConf = oldConf;
-    }
-
-    public ConfigurationEntry() {
-        super();
-    }
-
-    public ConfigurationEntry(final LogId id, final Configuration conf, final Configuration oldConf) {
-        super();
-        this.id = id;
-        this.conf = conf;
         this.oldConf = oldConf;
     }
 

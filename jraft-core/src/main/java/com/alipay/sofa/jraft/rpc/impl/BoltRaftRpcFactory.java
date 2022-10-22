@@ -32,20 +32,18 @@ import com.alipay.sofa.jraft.util.SPI;
 import com.alipay.sofa.jraft.util.SystemPropertyUtil;
 
 /**
- *
  * @author jiachun.fjc
  */
 @SPI
 public class BoltRaftRpcFactory implements RaftRpcFactory {
 
-    private static final Logger LOG                               = LoggerFactory.getLogger(BoltRaftRpcFactory.class);
-
-    static final int            CHANNEL_WRITE_BUF_LOW_WATER_MARK  = SystemPropertyUtil.getInt(
-                                                                      "bolt.channel_write_buf_low_water_mark",
-                                                                      256 * 1024);
-    static final int            CHANNEL_WRITE_BUF_HIGH_WATER_MARK = SystemPropertyUtil.getInt(
-                                                                      "bolt.channel_write_buf_high_water_mark",
-                                                                      512 * 1024);
+    static final int CHANNEL_WRITE_BUF_LOW_WATER_MARK = SystemPropertyUtil.getInt(
+            "bolt.channel_write_buf_low_water_mark",
+            256 * 1024);
+    static final int CHANNEL_WRITE_BUF_HIGH_WATER_MARK = SystemPropertyUtil.getInt(
+            "bolt.channel_write_buf_high_water_mark",
+            512 * 1024);
+    private static final Logger LOG = LoggerFactory.getLogger(BoltRaftRpcFactory.class);
 
     @Override
     public void registerProtobufSerializer(final String className, final Object... args) {
@@ -80,7 +78,7 @@ public class BoltRaftRpcFactory implements RaftRpcFactory {
         if (RpcConfigManager.dispatch_msg_list_in_default_executor()) {
             System.setProperty(RpcConfigs.DISPATCH_MSG_LIST_IN_DEFAULT_EXECUTOR, "false");
             LOG.warn("JRaft SET {} to be false for replicator pipeline optimistic.",
-                RpcConfigs.DISPATCH_MSG_LIST_IN_DEFAULT_EXECUTOR);
+                    RpcConfigs.DISPATCH_MSG_LIST_IN_DEFAULT_EXECUTOR);
         }
     }
 }
